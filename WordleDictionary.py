@@ -4,7 +4,7 @@
 This module defines the dictionary of five-letter words used in
 the Wordle project.
 """
- 
+
 FIVE_LETTER_WORDS = [
     "aahed", "aalii", "abaca", "abaci", "aback", "abaft", "abamp",
     "abase", "abash", "abate", "abbas", "abbey", "abbot", "abeam",
