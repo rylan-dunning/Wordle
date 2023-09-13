@@ -29,6 +29,8 @@ def wordle():
         if userWord in FIVE_LETTER_WORDS:
             
             gw.show_message("This word is in the word list")
+            
+            
             for char in range(N_COLS):
                 if userWord[char] in word[char]:
                     #color the letter in the right spot green
@@ -39,13 +41,12 @@ def wordle():
                 else:
                     #color the letter that isn't in the word grey
                     gw.set_square_color(current_row, char, MISSING_COLOR)
-                
+                    
+            current_row = current_row + 1
+            gw.set_current_row(current_row)
         #If word guess isn't in wordlist
         else:
             gw.show_message("Not in word list")
-            
-        current_row = current_row + 1
-        gw.set_current_row(current_row)
         
         if userWord == word:
             gw.show_message("You win! Click Enter to exit")
@@ -67,10 +68,6 @@ def wordle():
     display_word(word)
     
     
-    
-        
-    
-
 # Startup code
 
 if __name__ == "__main__":
