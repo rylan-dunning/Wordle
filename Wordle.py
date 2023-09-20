@@ -6,6 +6,7 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 """
 import sys
 import random
+import keyboard
 
 from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
@@ -13,8 +14,20 @@ from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT
 def wordle(): 
 
     def enter_action(s):
+        
+        #This is to clear the board and have a share screen
+        def results():
+            for row in range(N_ROWS):
+                for col in range(N_COLS):
+                    gw.set_square_letter(row, col,"")
+            
+            gw.show_message("Share this page with your friends!")
+                    
+                    
         #Concatenating the word the user inputted
         current_row = gw.get_current_row()
+        
+        
         
         userWordList = []
         for letter in range(N_COLS):
@@ -69,8 +82,9 @@ def wordle():
             gw.show_message("Not in word list")
         
         if userWord == word:
-            gw.show_message("You win! Click Enter to exit")
-        
+            gw.show_message("You win! Press the \"r\" key to share results!")
+            #This makes something happen when you hit the "r" key.
+            keyboard.add_hotkey("r", results)
         
 
     def display_word(word):
