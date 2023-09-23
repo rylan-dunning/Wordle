@@ -6,12 +6,14 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 """
 import sys
 import random
+import tkinter as tk
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR
+from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, BLACK, WHITE, op_CORRECT_COLOR, op_KEY_COLOR, op_MISSING_COLOR, op_PRESENT_COLOR, op_UNKNOWN_COLOR
+
 
 def wordle(): 
-
+    
     def enter_action(s):
         #Concatenating the word the user inputted
         current_row = gw.get_current_row()
@@ -77,12 +79,54 @@ def wordle():
             for x in range(N_COLS):
                 WordleGWindow.set_square_letter(gw, N_ROWS-6, x, word[x])
                 
+    def invert_colors():
+        val = var1.get()
+        if val == 1:
+            row = 0
+            print("val is 1")
+            while row < 6:
+                for letter in range(N_COLS):
+                    if gw.get_square_color(row, letter) == CORRECT_COLOR:
+                        gw.set_square_color(row, letter, op_CORRECT_COLOR)
+                        
+                    if gw.get_square_color(row, letter) == PRESENT_COLOR:
+                        gw.set_square_color(row, letter, op_PRESENT_COLOR)
+                        
+                    if gw.get_square_color(row, letter) == MISSING_COLOR:
+                        gw.set_square_color(row, letter, op_MISSING_COLOR)            
+                row = row + 1
+        
+            
+        if val == 0:
+            row = 0    
+            print("val is 0")
+            while row < 6:
+                for letter in range(N_COLS):
+                    if gw.get_square_color(row, letter) == op_CORRECT_COLOR:
+                        gw.set_square_color(row, letter, CORRECT_COLOR)
+                        
+                    if gw.get_square_color(row, letter) == op_PRESENT_COLOR:
+                        gw.set_square_color(row, letter, PRESENT_COLOR)
+                        
+                    if gw.get_square_color(row, letter) == op_MISSING_COLOR:
+                        gw.set_square_color(row, letter, MISSING_COLOR)            
+                row = row + 1
+                
+                
+    
     gw = WordleGWindow()
     gw.add_enter_listener(enter_action)
+    
+    var1 = tk.IntVar()
+    checkbutton = tk.Checkbutton(text="Dark Mode", variable=var1, command=invert_colors)
+    checkbutton.pack()
     
     number = random.randint(0, len(FIVE_LETTER_WORDS)-1)
     word = FIVE_LETTER_WORDS[number]
     display_word(word)
+    
+    
+    
     
 # Startup code
 

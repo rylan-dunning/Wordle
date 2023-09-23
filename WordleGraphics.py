@@ -9,6 +9,8 @@ import atexit
 import math
 import time
 import tkinter
+import tkinter as tk
+from tkinter import *
 
 # Constants
 
@@ -19,7 +21,17 @@ CORRECT_COLOR = "#66BB66"       # Light green for correct letters
 PRESENT_COLOR = "#CCBB66"       # Brownish yellow for misplaced letters
 MISSING_COLOR = "#999999"       # Gray for letters that don't appear
 UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
-KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
+KEY_COLOR = "#DDDDDD"
+BLACK = "Black"
+WHITE = "White"
+
+op_CORRECT_COLOR = "#ff0000"       # Light green for correct letters
+op_PRESENT_COLOR = "#a200ff"       # Brownish yellow for misplaced letters
+op_MISSING_COLOR = "#0015ff"       # Gray for letters that don't appear
+op_UNKNOWN_COLOR = "#000000"       # Undetermined letters are white
+op_KEY_COLOR = "#363636"
+BLACK = "Black"
+WHITE = "White"
 
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)
@@ -60,7 +72,7 @@ MESSAGE_Y = TOP_MARGIN + BOARD_HEIGHT + MESSAGE_SEP
 
 class WordleGWindow:
     """This class creates the Wordle window."""
-
+    
     def __init__(self):
         """Creates the Wordle window."""
 
@@ -154,7 +166,7 @@ class WordleGWindow:
         root.protocol("WM_DELETE_WINDOW", delete_window)
         self._root = root
         canvas = tkinter.Canvas(root,
-                                bg="White",
+                                bg=WHITE, #"White",
                                 width=CANVAS_WIDTH,
                                 height=CANVAS_HEIGHT,
                                 highlightthickness=0)
@@ -170,6 +182,7 @@ class WordleGWindow:
         self._row = 0
         self._col = 0
         atexit.register(start_event_loop)
+                
 
     def get_square_letter(self, row, col):
         return self._grid[row][col].get_letter()
@@ -202,9 +215,9 @@ class WordleGWindow:
     def add_enter_listener(self, fn):
         self._enter_listeners.append(fn)
 
-    def show_message(self, msg, color="Black"):
+    def show_message(self, msg, color=BLACK): #"black"
         self._message.set_text(msg, color)
-
+         
 
 class WordleSquare:
 
@@ -235,9 +248,9 @@ class WordleSquare:
     def set_color(self, color):
         color = color.upper()
         self._color = color
-        fg = "White"
+        fg = WHITE #"White"
         if color == UNKNOWN_COLOR:
-            fg = "Black"
+            fg = BLACK #"Black"
         self._canvas.itemconfig(self._frame, fill=color)
         self._canvas.itemconfig(self._text, fill=fg)
 
@@ -288,9 +301,9 @@ class WordleKey:
 
     def set_color(self, color):
         self._color = color
-        fg = "White"
+        fg = WHITE #"White"
         if color == UNKNOWN_COLOR:
-            fg = "Black"
+            fg = BLACK #"black"
         self._canvas.itemconfig(self._frame, fill=color)
         self._canvas.itemconfig(self._text, fill=fg)
 
@@ -308,6 +321,6 @@ class WordleMessage:
     def get_text(self):
         return self._text
 
-    def set_text(self, text, color="Black"):
+    def set_text(self, text, color=BLACK): #"Black"
         self._text = text
         self._canvas.itemconfigure(self._msg, text=text, fill=color)
