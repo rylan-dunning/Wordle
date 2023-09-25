@@ -129,7 +129,6 @@ def wordle():
             print("val is 0")
             while row < 6:
                 for letter in range(N_COLS):
-                    print(gw.get_square_color(row,letter))
                     if gw.get_square_color(row, letter) == op_CORRECT_COLOR: 
                         gw.set_square_color(row, letter, CORRECT_COLOR)
                         
