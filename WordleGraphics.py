@@ -30,8 +30,6 @@ op_PRESENT_COLOR = "#A200FF"       # Brownish yellow for misplaced letters
 op_MISSING_COLOR = "#0015FF"       # Gray for letters that don't appear
 op_UNKNOWN_COLOR = "#000000"       # Undetermined letters are white
 op_KEY_COLOR = "#363636"
-BLACK = "Black"
-WHITE = "White"
 
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)

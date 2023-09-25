@@ -10,7 +10,7 @@ import tkinter as tk
 import keyboard
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, WordleSquare, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, UNKNOWN_COLOR, BLACK, WHITE, op_CORRECT_COLOR, op_KEY_COLOR, op_MISSING_COLOR, op_PRESENT_COLOR, op_UNKNOWN_COLOR
+from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, op_CORRECT_COLOR, op_MISSING_COLOR, op_PRESENT_COLOR
 
 
 def wordle(): 
@@ -105,12 +105,14 @@ def wordle():
                 
     def invert_colors():
         val = var1.get()
+        
+        #Switch from regular to inverted
         if val == 1:
             row = 0
             print("val is 1")
             while row < 6:
                 for letter in range(N_COLS):
-                    if gw.get_square_color(row, letter) == CORRECT_COLOR: #Switch from regular to inverted
+                    if gw.get_square_color(row, letter) == CORRECT_COLOR: 
                         gw.set_square_color(row, letter, op_CORRECT_COLOR)
                         
                     if gw.get_square_color(row, letter) == PRESENT_COLOR:
@@ -120,14 +122,15 @@ def wordle():
                         gw.set_square_color(row, letter, op_MISSING_COLOR)                  
                 row = row + 1
         
-            
+        
+        #Switch from inverted to regular
         if val == 0:
             row = 0    
             print("val is 0")
             while row < 6:
                 for letter in range(N_COLS):
                     print(gw.get_square_color(row,letter))
-                    if gw.get_square_color(row, letter) == op_CORRECT_COLOR: #Switch from inverted to regular
+                    if gw.get_square_color(row, letter) == op_CORRECT_COLOR: 
                         gw.set_square_color(row, letter, CORRECT_COLOR)
                         
                     if gw.get_square_color(row, letter) == op_PRESENT_COLOR:
@@ -149,7 +152,7 @@ def wordle():
     
     number = random.randint(0, len(FIVE_LETTER_WORDS)-1)
     word = FIVE_LETTER_WORDS[number]
-    display_word(word)
+    #display_word(word)
     
     
     
