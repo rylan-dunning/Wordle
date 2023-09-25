@@ -7,6 +7,7 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 import sys
 import random
 import tkinter as tk
+import keyboard
 
 from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, WordleSquare, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, UNKNOWN_COLOR, BLACK, WHITE, op_CORRECT_COLOR, op_KEY_COLOR, op_MISSING_COLOR, op_PRESENT_COLOR, op_UNKNOWN_COLOR
@@ -16,6 +17,14 @@ def wordle():
     
     def enter_action(s):
         #Concatenating the word the user inputted
+        
+        def results():
+            for row in range(N_ROWS):
+                for col in range(N_COLS):
+                    gw.set_square_letter(row, col,"")
+            
+            gw.show_message("Share this page with your friends!")
+            
         current_row = gw.get_current_row()
         
         userWordList = []
@@ -84,7 +93,9 @@ def wordle():
             gw.show_message("Not in word list")
         
         if userWord == word:
-            gw.show_message("You win! Click Enter to exit")
+            gw.show_message("You win! Press the \"r\" key to share results!")
+            #This makes something happen when you hit the "r" key.
+            keyboard.add_hotkey("r", results)
         
         
 
