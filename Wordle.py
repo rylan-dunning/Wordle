@@ -9,7 +9,7 @@ import random
 import tkinter as tk
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, BLACK, WHITE, op_CORRECT_COLOR, op_KEY_COLOR, op_MISSING_COLOR, op_PRESENT_COLOR, op_UNKNOWN_COLOR
+from WordleGraphics import WordleGWindow, WordleSquare, N_COLS, N_ROWS, CORRECT_COLOR, PRESENT_COLOR, MISSING_COLOR, UNKNOWN_COLOR, BLACK, WHITE, op_CORRECT_COLOR, op_KEY_COLOR, op_MISSING_COLOR, op_PRESENT_COLOR, op_UNKNOWN_COLOR
 
 
 def wordle(): 
@@ -36,17 +36,26 @@ def wordle():
             
             gw.show_message("This word is in the word list")
             
+            val = var1.get()
+
             for char in range(N_COLS):
                 if guessWordList[char] in EliminateWordsList[char]:
                     #color the letter in the right spot green
-                    gw.set_square_color(current_row, char, CORRECT_COLOR)
+                    if val == 0:
+                        gw.set_square_color(current_row, char, CORRECT_COLOR)
+                    else:
+                        gw.set_square_color(current_row, char, op_CORRECT_COLOR)
                     EliminateWordsList[char] = "#" #Placeholder for letter already being used
                     guessWordList[char] = "&" #Placeholder for letter already being used
                     
             for char in range(N_COLS):
                 if guessWordList[char] in EliminateWordsList:
                     #color the letter thats in the word but not th right spot yellow
-                    gw.set_square_color(current_row, char, PRESENT_COLOR)
+                    if val == 0:
+                        gw.set_square_color(current_row, char, PRESENT_COLOR)
+                    else:
+                        gw.set_square_color(current_row, char, op_PRESENT_COLOR)
+                        
                     
                     for char2 in range(N_COLS):
                         if guessWordList[char] in EliminateWordsList[char2]:
@@ -57,7 +66,11 @@ def wordle():
             for char in range(N_COLS):
                 if guessWordList[char] != "&":
                     #color the letter that isn't in the word grey
-                    gw.set_square_color(current_row, char, MISSING_COLOR)
+                    if val == 0:
+                        gw.set_square_color(current_row, char, MISSING_COLOR)
+                    else:
+                        gw.set_square_color(current_row, char, op_MISSING_COLOR)
+                        
                     
             current_row = current_row + 1
             
@@ -86,14 +99,14 @@ def wordle():
             print("val is 1")
             while row < 6:
                 for letter in range(N_COLS):
-                    if gw.get_square_color(row, letter) == CORRECT_COLOR:
+                    if gw.get_square_color(row, letter) == CORRECT_COLOR: #Switch from regular to inverted
                         gw.set_square_color(row, letter, op_CORRECT_COLOR)
                         
                     if gw.get_square_color(row, letter) == PRESENT_COLOR:
                         gw.set_square_color(row, letter, op_PRESENT_COLOR)
                         
                     if gw.get_square_color(row, letter) == MISSING_COLOR:
-                        gw.set_square_color(row, letter, op_MISSING_COLOR)            
+                        gw.set_square_color(row, letter, op_MISSING_COLOR)                  
                 row = row + 1
         
             
@@ -102,7 +115,8 @@ def wordle():
             print("val is 0")
             while row < 6:
                 for letter in range(N_COLS):
-                    if gw.get_square_color(row, letter) == op_CORRECT_COLOR:
+                    print(gw.get_square_color(row,letter))
+                    if gw.get_square_color(row, letter) == op_CORRECT_COLOR: #Switch from inverted to regular
                         gw.set_square_color(row, letter, CORRECT_COLOR)
                         
                     if gw.get_square_color(row, letter) == op_PRESENT_COLOR:
@@ -113,13 +127,14 @@ def wordle():
                 row = row + 1
                 
                 
-    
     gw = WordleGWindow()
+    
     gw.add_enter_listener(enter_action)
     
-    var1 = tk.IntVar()
-    checkbutton = tk.Checkbutton(text="Dark Mode", variable=var1, command=invert_colors)
-    checkbutton.pack()
+    if True:
+        var1 = tk.IntVar()
+        checkbutton = tk.Checkbutton(text="Funky Color Mode", variable=var1, command=invert_colors)
+        checkbutton.pack()
     
     number = random.randint(0, len(FIVE_LETTER_WORDS)-1)
     word = FIVE_LETTER_WORDS[number]

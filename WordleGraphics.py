@@ -25,9 +25,9 @@ KEY_COLOR = "#DDDDDD"
 BLACK = "Black"
 WHITE = "White"
 
-op_CORRECT_COLOR = "#ff0000"       # Light green for correct letters
-op_PRESENT_COLOR = "#a200ff"       # Brownish yellow for misplaced letters
-op_MISSING_COLOR = "#0015ff"       # Gray for letters that don't appear
+op_CORRECT_COLOR = "#FF0000"       # Light green for correct letters
+op_PRESENT_COLOR = "#A200FF"       # Brownish yellow for misplaced letters
+op_MISSING_COLOR = "#0015FF"       # Gray for letters that don't appear
 op_UNKNOWN_COLOR = "#000000"       # Undetermined letters are white
 op_KEY_COLOR = "#363636"
 BLACK = "Black"
